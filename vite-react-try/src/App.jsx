@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { ThemeProvider } from 'styled-components'
+import Header from './components/Header'
+import { Container } from './components/Styles/Container.styled'
+import GlobalStyle from './components/Styles/Global'
+import content from './content'
+import Card from './components/Card'
+import Footer from './components/Footer'
+
+const theme = {
+  colors: {
+    header: '#abfbff',
+    body: '#fff', 
+    footer: '#000',
+  },
+  mobile: "768px"
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-        hello mina
-      </p>
-    </div>
+    <ThemeProvider theme= {theme}>
+      <GlobalStyle />
+
+      <Header /> 
+
+      <Container className="App">
+        { 
+          content.map( (item  , index) =>(
+            <Card kay={index} item={item} />
+          ))
+        }
+      </Container>
+
+      <Footer/>
+      
+    </ThemeProvider>
   )
 }
 
